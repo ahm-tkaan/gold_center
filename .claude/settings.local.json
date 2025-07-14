@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__supabase__apply_migration",
+      "Bash(npm install:*)",
+      "Bash(npx shadcn:*)",
+      "Bash(mkdir:*)",
+      "mcp__supabase__execute_sql",
+      "Bash(npm run dev:*)"
+    ],
+    "deny": []
+  }
+}

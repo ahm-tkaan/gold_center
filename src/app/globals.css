@@ -1,26 +1,59 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: 47 30% 97%; /* #FDFBF6 - Krem Beyazı */
+    --foreground: 210 16% 22%; /* #2C3E50 - Koyu Kurşun */
+    --card: 47 30% 97%;
+    --card-foreground: 210 16% 22%;
+    --popover: 47 30% 97%;
+    --popover-foreground: 210 16% 22%;
+    --primary: 43 74% 49%; /* #D4AF37 - Antik Altın */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 92%; /* #EAEAEA - Açık Gri */
+    --secondary-foreground: 0 0% 20%; /* #333333 - Koyu Gri */
+    --muted: 0 0% 92%;
+    --muted-foreground: 210 16% 22%;
+    --accent: 0 0% 92%;
+    --accent-foreground: 210 16% 22%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 92%;
+    --input: 0 0% 92%;
+    --ring: 43 74% 49%;
+    --radius: 0.5rem;
+  }
+  
+  .dark {
+    --background: 210 16% 22%;
+    --foreground: 0 0% 98%;
+    --card: 210 16% 22%;
+    --card-foreground: 0 0% 98%;
+    --popover: 210 16% 22%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 43 74% 49%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 20%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 20%;
+    --muted-foreground: 0 0% 63%;
+    --accent: 0 0% 20%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 43 74% 49%;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }
