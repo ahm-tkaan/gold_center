@@ -80,7 +80,7 @@ export default async function KategoriDetayPage({ params }: PageProps) {
                 
                 {product.description && (
                   <p className="text-neutral-600 text-sm mb-3 line-clamp-2">
-                    {product.description}
+                    {typeof product.description === 'string' ? product.description : JSON.stringify(product.description)}
                   </p>
                 )}
 
