@@ -16,9 +16,9 @@ export default function Footer() {
             <h4 className="text-lg font-semibold mb-4">Ürünler</h4>
             <ul className="space-y-2">
               <li><Link href="/urunler" className="text-gray-300 hover:text-primary transition-colors">Tüm Ürünler</Link></li>
-              <li><Link href="/kategoriler/yuzuk" className="text-gray-300 hover:text-primary transition-colors">Yüzükler</Link></li>
-              <li><Link href="/kategoriler/kolye" className="text-gray-300 hover:text-primary transition-colors">Kolyeler</Link></li>
-              <li><Link href="/kategoriler/kupe" className="text-gray-300 hover:text-primary transition-colors">Küpeler</Link></li>
+              <li><Link href="/kategoriler/yuzukler" className="text-gray-300 hover:text-primary transition-colors">Yüzükler</Link></li>
+              <li><Link href="/kategoriler/kolyeler" className="text-gray-300 hover:text-primary transition-colors">Kolyeler</Link></li>
+              <li><Link href="/kategoriler/kupeler" className="text-gray-300 hover:text-primary transition-colors">Küpeler</Link></li>
             </ul>
           </div>
           
