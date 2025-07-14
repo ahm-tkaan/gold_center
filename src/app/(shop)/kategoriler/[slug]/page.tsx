@@ -59,7 +59,7 @@ export default async function KategoriDetayPage({ params }: PageProps) {
                 <div className="relative h-64 overflow-hidden">
                   {product.images && product.images.length > 0 ? (
                     <Image
-                      src={product.images[0].url}
+                      src={product.images[0].image_url}
                       alt={product.images[0].alt_text || product.name}
                       fill
                       className="object-cover transition-transform duration-300 group-hover:scale-105"

@@ -16,6 +16,7 @@ export interface Product {
   slug: string
   description: Record<string, unknown> | null
   base_sku: string | null
+  base_price: number
   is_active: boolean
   is_featured: boolean
   created_at: string
