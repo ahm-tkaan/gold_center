@@ -47,7 +47,7 @@ export default function WhatsAppPage() {
                 className="bg-green-600 hover:bg-green-700 text-white text-lg px-8 py-4"
               >
                 <Link href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-                  WhatsApp'ta Mesaj Gönder
+                  WhatsApp&apos;ta Mesaj Gönder
                 </Link>
               </Button>
               <p className="text-sm text-neutral-500 mt-4">

@@ -125,7 +125,7 @@ export default function KullanimKosullariPage() {
           <section>
             <h2 className="text-2xl font-bold text-neutral-900 mb-4">9. Fikri Mülkiyet</h2>
             <p className="text-neutral-700">
-              Web sitemizdeki tüm içerik, görseller ve tasarımlar Gold Center'a aittir. 
+              Web sitemizdeki tüm içerik, görseller ve tasarımlar Gold Center&apos;a aittir. 
               İzinsiz kullanım, kopyalama veya dağıtım yasaktır.
             </p>
           </section>

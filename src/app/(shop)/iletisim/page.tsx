@@ -42,7 +42,7 @@ export default function IletisimPage() {
                   <p className="font-medium">+90 555 123 4567</p>
                   <Button asChild className="bg-green-600 hover:bg-green-700">
                     <Link href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-                      WhatsApp'ta Mesaj Gönder
+                      WhatsApp&apos;ta Mesaj Gönder
                     </Link>
                   </Button>
                 </div>
@@ -129,12 +129,12 @@ export default function IletisimPage() {
                     En Hızlı İletişim: WhatsApp
                   </h3>
                   <p className="text-neutral-600">
-                    Anında yanıt almak için WhatsApp'tan mesaj gönderin. 
+                    Anında yanıt almak için WhatsApp&apos;tan mesaj gönderin. 
                     Tüm sorularınızı yanıtlamaya hazırız!
                   </p>
                   <Button asChild size="lg" className="bg-green-600 hover:bg-green-700">
                     <Link href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-                      WhatsApp'ta Soru Sor
+                      WhatsApp&apos;ta Soru Sor
                     </Link>
                   </Button>
                 </div>

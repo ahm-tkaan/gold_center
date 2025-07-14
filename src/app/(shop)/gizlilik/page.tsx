@@ -124,7 +124,7 @@ export default function GizlilikPage() {
         <div className="bg-primary/5 p-6 rounded-lg mt-12">
           <p className="text-neutral-700 text-center">
             <strong>Not:</strong> Bu gizlilik politikası Gold Center tarafından hazırlanmış olup, 
-            Türkiye Cumhuriyeti yasalarına ve KVKK'ya uygun şekilde düzenlenmiştir.
+            Türkiye Cumhuriyeti yasalarına ve KVKK&apos;ya uygun şekilde düzenlenmiştir.
           </p>
         </div>
       </div>
