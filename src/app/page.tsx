@@ -4,10 +4,17 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { HeroSlider } from '@/components/HeroSlider'
 import { getHeroSliderImages } from '@/lib/db'
+import { ErrorBoundary } from '@/components/ErrorBoundary'
+import { HeroSliderSkeleton } from '@/components/LoadingStates'
+import { Suspense } from 'react'
 import Link from 'next/link'
 
-export default async function Home() {
+async function HeroSliderSection() {
   const sliderImages = await getHeroSliderImages()
+  return <HeroSlider images={sliderImages} />
+}
+
+export default async function Home() {
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -15,7 +22,11 @@ export default async function Home() {
       
       <main className="flex-1">
         {/* Hero Slider Section */}
-        <HeroSlider images={sliderImages} />
+        <ErrorBoundary>
+          <Suspense fallback={<HeroSliderSkeleton />}>
+            <HeroSliderSection />
+          </Suspense>
+        </ErrorBoundary>
 
         {/* Welcome Section */}
         <section className="bg-gradient-to-r from-primary/10 to-primary/5 py-20">

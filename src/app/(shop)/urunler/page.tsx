@@ -5,6 +5,9 @@ import ProductCard from '@/components/features/ProductCard'
 import ProductFilters from '@/components/features/ProductFilters'
 import { getAllProducts, getCategories } from '@/lib/db'
 import { ProductWithVariants, Category } from '@/types'
+import { ErrorBoundary, DatabaseErrorFallback } from '@/components/ErrorBoundary'
+import { ProductGridSkeleton, CategoryFilterSkeleton, EmptyState } from '@/components/LoadingStates'
+import { Suspense } from 'react'
 
 export const metadata: Metadata = {
   title: 'Ürünler - Gold Center',
@@ -12,12 +15,43 @@ export const metadata: Metadata = {
 }
 
 
-export default async function ProductsPage() {
+async function ProductsSection() {
   const [products, categories] = await Promise.all([
     getAllProducts(),
     getCategories()
   ]) as [ProductWithVariants[], Category[]]
 
+  return (
+    <div className="flex flex-col lg:flex-row gap-8">
+      {/* Filters Sidebar */}
+      <div className="lg:w-1/4">
+        <ErrorBoundary fallback={DatabaseErrorFallback}>
+          <Suspense fallback={<CategoryFilterSkeleton />}>
+            <ProductFilters categories={categories} products={products} />
+          </Suspense>
+        </ErrorBoundary>
+      </div>
+
+      {/* Products Grid */}
+      <div className="lg:w-3/4">
+        {products.length === 0 ? (
+          <EmptyState
+            title="Henüz ürün bulunmuyor"
+            description="Yakında yeni ürünler eklenecek, takipte kalın!"
+          />
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+            {products.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
+export default async function ProductsPage() {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -33,32 +67,11 @@ export default async function ProductsPage() {
             </p>
           </div>
 
-          <div className="flex flex-col lg:flex-row gap-8">
-            {/* Filters Sidebar */}
-            <div className="lg:w-1/4">
-              <ProductFilters categories={categories} products={products} />
-            </div>
-
-            {/* Products Grid */}
-            <div className="lg:w-3/4">
-              {products.length === 0 ? (
-                <div className="text-center py-16">
-                  <h2 className="text-2xl font-semibold text-neutral-600 mb-4">
-                    Henüz ürün bulunmuyor
-                  </h2>
-                  <p className="text-neutral-500">
-                    Yakında yeni ürünler eklenecek, takipte kalın!
-                  </p>
-                </div>
-              ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
-                  {products.map((product) => (
-                    <ProductCard key={product.id} product={product} />
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
+          <ErrorBoundary fallback={DatabaseErrorFallback}>
+            <Suspense fallback={<ProductGridSkeleton />}>
+              <ProductsSection />
+            </Suspense>
+          </ErrorBoundary>
         </div>
       </main>
       

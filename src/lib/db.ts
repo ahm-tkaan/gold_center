@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
+import { DatabaseError, withErrorHandling } from '@/lib/error-handling'
 
-export async function getHeroSliderImages() {
+export const getHeroSliderImages = withErrorHandling(async () => {
   const supabase = await createClient()
   const { data, error } = await supabase
     .from('hero_slider_images')
@@ -9,14 +10,18 @@ export async function getHeroSliderImages() {
     .order('display_order', { ascending: true })
 
   if (error) {
-    console.error('Hero slider images fetch error:', error)
-    return []
+    throw new DatabaseError(
+      'HERO_SLIDER_FETCH_ERROR',
+      `Failed to fetch hero slider images: ${error.message}`,
+      'medium',
+      { supabaseError: error }
+    )
   }
 
   return data || []
-}
+}, 'HERO_SLIDER_FETCH_ERROR')
 
-export async function getCategories() {
+export const getCategories = withErrorHandling(async () => {
   const supabase = await createClient()
   const { data, error } = await supabase
     .from('categories')
@@ -24,12 +29,16 @@ export async function getCategories() {
     .order('sort_order', { ascending: true })
 
   if (error) {
-    console.error('Categories fetch error:', error)
-    return []
+    throw new DatabaseError(
+      'CATEGORIES_FETCH_ERROR',
+      `Failed to fetch categories: ${error.message}`,
+      'medium',
+      { supabaseError: error }
+    )
   }
 
   return data || []
-}
+}, 'CATEGORIES_FETCH_ERROR')
 
 export async function getCategoryBySlug(slug: string) {
   const supabase = await createClient()
@@ -69,7 +78,7 @@ export async function getProductsByCategory(categoryId: number) {
   return data || []
 }
 
-export async function getAllProducts() {
+export const getAllProducts = withErrorHandling(async () => {
   const supabase = await createClient()
   const { data, error } = await supabase
     .from('products')
@@ -83,12 +92,16 @@ export async function getAllProducts() {
     .order('created_at', { ascending: false })
 
   if (error) {
-    console.error('Error fetching products:', error)
-    return []
+    throw new DatabaseError(
+      'PRODUCTS_FETCH_ERROR',
+      `Failed to fetch products: ${error.message}`,
+      'high',
+      { supabaseError: error }
+    )
   }
 
   return data || []
-}
+}, 'PRODUCTS_FETCH_ERROR')
 
 export async function getProductBySlug(slug: string) {
   const supabase = await createClient()
