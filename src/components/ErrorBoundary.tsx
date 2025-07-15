@@ -13,7 +13,7 @@ interface ErrorBoundaryProps {
 interface ErrorBoundaryState {
   hasError: boolean
   error?: Error
-  errorInfo?: any
+  errorInfo?: unknown
 }
 
 export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
@@ -29,7 +29,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
     }
   }
 
-  componentDidCatch(error: Error, errorInfo: any) {
+  componentDidCatch(error: Error, errorInfo: unknown) {
     console.error('Error caught by boundary:', error, errorInfo)
     
     this.setState({
@@ -119,7 +119,7 @@ function DefaultErrorFallback({ error, retry }: { error: Error; retry: () => voi
   )
 }
 
-export function DatabaseErrorFallback({ error, retry }: { error: Error; retry: () => void }) {
+export function DatabaseErrorFallback({ retry }: { error: Error; retry: () => void }) {
   return (
     <div className="min-h-[400px] flex items-center justify-center p-4">
       <Card className="max-w-md w-full">

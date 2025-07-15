@@ -95,7 +95,7 @@ if (typeof window === 'undefined') {
   try {
     validateEnvironment()
     console.log('✅ Environment validation passed')
-  } catch (error) {
+  } catch {
     console.error('❌ Environment validation failed during startup')
     if (process.env.NODE_ENV === 'production') {
       process.exit(1)

@@ -99,10 +99,10 @@ export async function createClient() {
   }
 }
 
-export async function healthCheck(): Promise<{ status: 'healthy' | 'unhealthy', details?: any }> {
+export async function healthCheck(): Promise<{ status: 'healthy' | 'unhealthy', details?: unknown }> {
   try {
     const client = await createClient()
-    const { data, error } = await client.from('categories').select('count', { count: 'exact' }).limit(1)
+    const { error } = await client.from('categories').select('count', { count: 'exact' }).limit(1)
     
     if (error) {
       return {

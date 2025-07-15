@@ -6,7 +6,7 @@ export interface AppError {
   code: string
   message: string
   severity: ErrorSeverity
-  context?: Record<string, any>
+  context?: Record<string, unknown>
   timestamp: Date
   userAgent?: string
   url?: string
@@ -21,7 +21,7 @@ export class DatabaseError extends Error {
     code: string,
     message: string,
     severity: ErrorSeverity = 'high',
-    context?: Record<string, any>
+    context?: Record<string, unknown>
   ) {
     super(message)
     this.name = 'DatabaseError'
@@ -40,7 +40,7 @@ export class ValidationError extends Error {
     code: string,
     message: string,
     severity: ErrorSeverity = 'medium',
-    context?: Record<string, any>
+    context?: Record<string, unknown>
   ) {
     super(message)
     this.name = 'ValidationError'
@@ -59,7 +59,7 @@ export class ExternalServiceError extends Error {
     code: string,
     message: string,
     severity: ErrorSeverity = 'medium',
-    context?: Record<string, any>
+    context?: Record<string, unknown>
   ) {
     super(message)
     this.name = 'ExternalServiceError'
@@ -186,16 +186,9 @@ function getStatusCodeFromError(error: AppError): number {
   }
 }
 
-export function createErrorBoundary(fallback: any) {
-  return class ErrorBoundary extends Error {
-    constructor(props: any) {
-      super()
-      // This is a placeholder - actual implementation would need React
-    }
-  }
-}
+// Removed - using React Error Boundary component instead
 
-export function withErrorHandling<T extends any[], R>(
+export function withErrorHandling<T extends unknown[], R>(
   fn: (...args: T) => Promise<R>,
   errorCode: string = 'FUNCTION_ERROR'
 ): (...args: T) => Promise<R> {
