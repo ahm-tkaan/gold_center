@@ -28,11 +28,7 @@ async function ProductsSection() {
     <div className="flex flex-col lg:flex-row gap-8">
       {/* Filters Sidebar */}
       <div className="lg:w-1/4">
-        <ErrorBoundary fallback={DatabaseErrorFallback}>
-          <Suspense fallback={<CategoryFilterSkeleton />}>
-            <ProductFilters categories={categories} products={products} />
-          </Suspense>
-        </ErrorBoundary>
+        <ProductFilters categories={categories} products={products} />
       </div>
 
       {/* Products Grid */}
@@ -71,9 +67,7 @@ export default async function ProductsPage() {
           </div>
 
           <ErrorBoundary fallback={DatabaseErrorFallback}>
-            <Suspense fallback={<ProductGridSkeleton />}>
-              <ProductsSection />
-            </Suspense>
+            <ProductsSection />
           </ErrorBoundary>
         </div>
       </main>

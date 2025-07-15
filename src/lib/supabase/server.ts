@@ -54,24 +54,26 @@ export async function createClient() {
       }
     )
 
-    // Test connection
-    try {
-      const { error } = await client.from('categories').select('count', { count: 'exact' }).limit(1)
-      if (error) {
-        throw new DatabaseError(
-          'DATABASE_CONNECTION_TEST_FAILED',
-          `Database connection test failed: ${error.message}`,
-          'high',
-          { supabaseError: error }
-        )
+    // Test connection only if not in production to avoid extra overhead
+    if (process.env.NODE_ENV !== 'production') {
+      try {
+        const { error } = await client.from('categories').select('count', { count: 'exact' }).limit(1)
+        if (error) {
+          throw new DatabaseError(
+            'DATABASE_CONNECTION_TEST_FAILED',
+            `Database connection test failed: ${error.message}`,
+            'high',
+            { supabaseError: error }
+          )
+        }
+      } catch (testError) {
+        logError(new DatabaseError(
+          'DATABASE_CONNECTION_TEST_ERROR',
+          'Failed to test database connection',
+          'medium',
+          { error: testError instanceof Error ? testError.message : 'Unknown error' }
+        ))
       }
-    } catch (testError) {
-      logError(new DatabaseError(
-        'DATABASE_CONNECTION_TEST_ERROR',
-        'Failed to test database connection',
-        'medium',
-        { error: testError instanceof Error ? testError.message : 'Unknown error' }
-      ))
     }
 
     return client

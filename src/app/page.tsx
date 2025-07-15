@@ -26,9 +26,7 @@ export default async function Home() {
       <main className="flex-1">
         {/* Hero Slider Section */}
         <ErrorBoundary>
-          <Suspense fallback={<HeroSliderSkeleton />}>
-            <HeroSliderSection />
-          </Suspense>
+          <HeroSliderSection />
         </ErrorBoundary>
 
         {/* Welcome Section */}

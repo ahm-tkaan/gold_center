@@ -32,6 +32,15 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
   componentDidCatch(error: Error, errorInfo: unknown) {
     console.error('Error caught by boundary:', error, errorInfo)
     
+    // Log additional error details for debugging
+    console.error('Error details:', {
+      name: error.name,
+      message: error.message,
+      stack: error.stack,
+      digest: (error as any).digest,
+      errorInfo
+    })
+    
     this.setState({
       hasError: true,
       error,
@@ -41,7 +50,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
     // Log error to monitoring service in production
     if (process.env.NODE_ENV === 'production') {
       // TODO: Send to error monitoring service
-      console.error('Production error:', { error, errorInfo })
+      console.error('Production error:', { error, errorInfo, digest: (error as any).digest })
     }
   }
 
