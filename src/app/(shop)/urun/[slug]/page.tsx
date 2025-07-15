@@ -3,11 +3,11 @@ import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
-import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { supabase } from '@/lib/db'
 import { formatPrice } from '@/lib/utils'
 import { ProductWithVariants } from '@/types'
+import { WhatsAppButton } from '@/components/features/WhatsAppButton'
 
 interface ProductPageProps {
   params: Promise<{
@@ -70,11 +70,6 @@ export default async function ProductPage({ params }: ProductPageProps) {
     product.variants[0]?.price_in_cents || 0
   )
 
-  const handleWhatsAppOrder = () => {
-    const message = `Merhaba! ${product.name} ürününle ilgili bilgi almak istiyorum.`
-    const whatsappUrl = `https://wa.me/905551234567?text=${encodeURIComponent(message)}`
-    window.open(whatsappUrl, '_blank')
-  }
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -161,13 +156,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
               )}
 
               <div className="space-y-4">
-                <Button 
-                  size="lg" 
-                  className="w-full"
-                  onClick={handleWhatsAppOrder}
-                >
-                  WhatsApp ile Sipariş Ver
-                </Button>
+                <WhatsAppButton productName={product.name} />
                 
                 <p className="text-sm text-neutral-600 text-center">
                   WhatsApp üzerinden hızlı ve güvenli sipariş verebilirsiniz

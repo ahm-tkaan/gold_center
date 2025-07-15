@@ -4,12 +4,15 @@ import Navbar from '@/components/layout/Navbar'
 import Link from 'next/link'
 import Image from 'next/image'
 import type { Category } from '@/types'
+import InfiniteScrollHandler from '@/components/features/InfiniteScrollHandler'
 
 export default async function KategorilerPage() {
   const categories = await getCategories() as Category[]
 
   return (
-    <div className="h-screen overflow-y-scroll snap-y snap-mandatory">
+    <>
+      <InfiniteScrollHandler />
+      <div className="h-screen overflow-y-scroll snap-y snap-mandatory">
       {/* Navbar Section */}
       <div className="h-screen snap-start">
         <Navbar />
@@ -124,44 +127,8 @@ export default async function KategorilerPage() {
         </div>
       ))}
 
-      {/* Final CTA Section */}
-      <div className="h-screen snap-start bg-gradient-to-br from-primary to-primary/80">
-        <div className="h-full flex items-center justify-center text-primary-foreground">
-          <div className="text-center max-w-4xl mx-auto px-4">
-            <h2 className="text-5xl md:text-7xl font-bold mb-6">
-              Gold Center
-            </h2>
-            <p className="text-xl md:text-2xl mb-12 max-w-2xl mx-auto opacity-90">
-              Kaliteli altın ürünlerin tek adresi. WhatsApp üzerinden hızlı sipariş verin.
-            </p>
-            
-            <div className="space-y-4 sm:space-y-0 sm:space-x-4 sm:flex sm:justify-center">
-              <Button 
-                asChild 
-                variant="secondary" 
-                size="lg" 
-                className="text-lg px-8 py-4"
-              >
-                <Link href="/urunler">
-                  Tüm Ürünleri Görüntüle
-                </Link>
-              </Button>
-              
-              <Button 
-                asChild 
-                variant="outline" 
-                size="lg" 
-                className="text-lg px-8 py-4 border-white/30 text-white hover:bg-white/20"
-              >
-                <Link href="/whatsapp">
-                  WhatsApp Sipariş
-                </Link>
-              </Button>
-            </div>
-          </div>
-        </div>
       </div>
-    </div>
+    </>
   )
 }
 
