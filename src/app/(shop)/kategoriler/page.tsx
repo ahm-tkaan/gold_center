@@ -6,6 +6,9 @@ import Image from 'next/image'
 import type { Category } from '@/types'
 import InfiniteScrollHandler from '@/components/features/InfiniteScrollHandler'
 
+// Force dynamic rendering for this page
+export const dynamic = 'force-dynamic'
+
 export default async function KategorilerPage() {
   const categories = await getCategories() as Category[]
 

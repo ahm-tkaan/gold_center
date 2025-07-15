@@ -9,6 +9,9 @@ import { HeroSliderSkeleton } from '@/components/LoadingStates'
 import { Suspense } from 'react'
 import Link from 'next/link'
 
+// Force dynamic rendering for this page
+export const dynamic = 'force-dynamic'
+
 async function HeroSliderSection() {
   const sliderImages = await getHeroSliderImages()
   return <HeroSlider images={sliderImages} />

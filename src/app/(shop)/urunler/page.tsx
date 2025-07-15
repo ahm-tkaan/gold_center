@@ -14,6 +14,9 @@ export const metadata: Metadata = {
   description: 'Yüksek kaliteli altın ve gümüş takı koleksiyonumuzu keşfedin.',
 }
 
+// Force dynamic rendering for this page
+export const dynamic = 'force-dynamic'
+
 
 async function ProductsSection() {
   const [products, categories] = await Promise.all([

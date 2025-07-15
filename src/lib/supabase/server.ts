@@ -3,13 +3,9 @@ import { cookies } from 'next/headers'
 import { getSupabaseConfig } from '@/lib/env-validation'
 import { DatabaseError, logError } from '@/lib/error-handling'
 
-let clientInstance: ReturnType<typeof createServerClient> | null = null
-
 export async function createClient() {
-  // Use cached client if available to reduce connection overhead
-  if (clientInstance) {
-    return clientInstance
-  }
+  // Don't cache client during static generation
+  // Each request should get a fresh client
 
   try {
     const cookieStore = await cookies()
@@ -78,7 +74,6 @@ export async function createClient() {
       ))
     }
 
-    clientInstance = client
     return client
 
   } catch (error) {
