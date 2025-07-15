@@ -3,7 +3,7 @@ import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import ProductCard from '@/components/features/ProductCard'
 import ProductFilters from '@/components/features/ProductFilters'
-import { supabase, getCategories } from '@/lib/db'
+import { getAllProducts, getCategories } from '@/lib/db'
 import { ProductWithVariants, Category } from '@/types'
 
 export const metadata: Metadata = {
@@ -11,29 +11,10 @@ export const metadata: Metadata = {
   description: 'Yüksek kaliteli altın ve gümüş takı koleksiyonumuzu keşfedin.',
 }
 
-async function getProducts(): Promise<ProductWithVariants[]> {
-  const { data: products, error } = await supabase
-    .from('products')
-    .select(`
-      *,
-      category:categories(*),
-      variants:product_variants(*),
-      images:product_images(*)
-    `)
-    .eq('is_active', true)
-    .order('created_at', { ascending: false })
-
-  if (error) {
-    console.error('Error fetching products:', error)
-    return []
-  }
-
-  return products || []
-}
 
 export default async function ProductsPage() {
   const [products, categories] = await Promise.all([
-    getProducts(),
+    getAllProducts(),
     getCategories()
   ]) as [ProductWithVariants[], Category[]]
 

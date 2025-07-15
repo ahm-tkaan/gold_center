@@ -6,7 +6,9 @@
       "Bash(npx shadcn:*)",
       "Bash(mkdir:*)",
       "mcp__supabase__execute_sql",
-      "Bash(npm run dev:*)"
+      "Bash(npm run dev:*)",
+      "mcp__supabase__list_tables",
+      "mcp__supabase__get_advisors"
     ],
     "deny": []
   }

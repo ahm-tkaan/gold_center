@@ -1,19 +1,7 @@
-import { createClient } from '@supabase/supabase-js'
-
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-
-if (!supabaseUrl || !supabaseAnonKey) {
-  throw new Error('Missing Supabase environment variables')
-}
-
-export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
-  auth: {
-    persistSession: false
-  }
-})
+import { createClient } from '@/lib/supabase/server'
 
 export async function getHeroSliderImages() {
+  const supabase = await createClient()
   const { data, error } = await supabase
     .from('hero_slider_images')
     .select('id, title, description, image_url, alt_text')
@@ -29,6 +17,7 @@ export async function getHeroSliderImages() {
 }
 
 export async function getCategories() {
+  const supabase = await createClient()
   const { data, error } = await supabase
     .from('categories')
     .select('*')
@@ -43,6 +32,7 @@ export async function getCategories() {
 }
 
 export async function getCategoryBySlug(slug: string) {
+  const supabase = await createClient()
   const { data, error } = await supabase
     .from('categories')
     .select('*')
@@ -58,6 +48,7 @@ export async function getCategoryBySlug(slug: string) {
 }
 
 export async function getProductsByCategory(categoryId: number) {
+  const supabase = await createClient()
   const { data, error } = await supabase
     .from('products')
     .select(`
@@ -76,4 +67,47 @@ export async function getProductsByCategory(categoryId: number) {
   }
 
   return data || []
+}
+
+export async function getAllProducts() {
+  const supabase = await createClient()
+  const { data, error } = await supabase
+    .from('products')
+    .select(`
+      *,
+      category:categories(*),
+      variants:product_variants(*),
+      images:product_images(*)
+    `)
+    .eq('is_active', true)
+    .order('created_at', { ascending: false })
+
+  if (error) {
+    console.error('Error fetching products:', error)
+    return []
+  }
+
+  return data || []
+}
+
+export async function getProductBySlug(slug: string) {
+  const supabase = await createClient()
+  const { data, error } = await supabase
+    .from('products')
+    .select(`
+      *,
+      category:categories(*),
+      variants:product_variants(*),
+      images:product_images(*)
+    `)
+    .eq('slug', slug)
+    .eq('is_active', true)
+    .single()
+
+  if (error) {
+    console.error('Product fetch error:', error)
+    return null
+  }
+
+  return data
 }

@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import { Card, CardContent } from '@/components/ui/card'
-import { supabase } from '@/lib/db'
+import { getProductBySlug } from '@/lib/db'
 import { formatPrice } from '@/lib/utils'
 import { ProductWithVariants } from '@/types'
 import { WhatsAppButton } from '@/components/features/WhatsAppButton'
@@ -16,23 +16,7 @@ interface ProductPageProps {
 }
 
 async function getProduct(slug: string): Promise<ProductWithVariants | null> {
-  const { data: product, error } = await supabase
-    .from('products')
-    .select(`
-      *,
-      category:categories(*),
-      variants:product_variants(*),
-      images:product_images(*)
-    `)
-    .eq('slug', slug)
-    .eq('is_active', true)
-    .single()
-
-  if (error || !product) {
-    return null
-  }
-
-  return product
+  return await getProductBySlug(slug)
 }
 
 export async function generateMetadata(
