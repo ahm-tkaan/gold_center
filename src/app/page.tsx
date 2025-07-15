@@ -25,9 +25,7 @@ export default async function Home() {
       
       <main className="flex-1">
         {/* Hero Slider Section */}
-        <ErrorBoundary>
-          <HeroSliderSection />
-        </ErrorBoundary>
+        <HeroSliderSection />
 
         {/* Welcome Section */}
         <section className="bg-gradient-to-r from-primary/10 to-primary/5 py-20">

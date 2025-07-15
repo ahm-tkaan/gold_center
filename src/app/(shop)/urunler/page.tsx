@@ -66,9 +66,7 @@ export default async function ProductsPage() {
             </p>
           </div>
 
-          <ErrorBoundary fallback={DatabaseErrorFallback}>
-            <ProductsSection />
-          </ErrorBoundary>
+          <ProductsSection />
         </div>
       </main>
       
