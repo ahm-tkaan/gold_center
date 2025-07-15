@@ -51,7 +51,7 @@ export default function HakkimizdaPage() {
                     titizlikle işlenmiş ve güven belgesi ile size sunulmaktadır.
                   </p>
                   <p>
-                    Bugün binlerce mutlu müşterimizle, Türkiye'nin önde gelen mücevherat 
+                    Bugün binlerce mutlu müşterimizle, Türkiye&apos;nin önde gelen mücevherat 
                     markalarından biri haline gelmenin gururunu yaşıyoruz.
                   </p>
                 </div>
