@@ -7,6 +7,8 @@ import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import type { Category, Product } from '@/types'
 
+export const dynamic = 'force-dynamic'
+
 type PageProps = {
   params: Promise<{ slug: string }>
 }

@@ -9,6 +9,8 @@ import { formatPrice } from '@/lib/utils'
 import { ProductWithVariants } from '@/types'
 import { WhatsAppButton } from '@/components/features/WhatsAppButton'
 
+export const dynamic = 'force-dynamic'
+
 interface ProductPageProps {
   params: Promise<{
     slug: string
